@@ -3,6 +3,9 @@ body {
     text-align: center;
 }
 
+button {
+    margin: 10px;
+}
 /* the hr represents the line going across the gameboard */
 hr {
     width: 600px;
