@@ -4,9 +4,11 @@
 const boxes = Array.from(document.getElementsByClassName('box'));
 
 const playText = document.getElementById('playText');
+// This is where the user will choose to restart the game. It is retrieving the reset button from the HTML.
+const resetBtn = document.getElementById('resetBtn')
 
 // the below array represents the empty spaces on the board
-const emptyBox = [null, null, null, null, null, null, null, null, null];
+const emptyBox = [];
 const player1 = 'O';
 const player2 = 'X';
 // This tells the game to start with player2
@@ -38,27 +40,95 @@ const drawBoard = () => {
 // This is the click event that tells us which box in the ID has been clicked
 const boxClicked = (e) => {
      const id = e.target.id;
-    //  console.log(id);
-     if(!emptyBox[id]){
+     console.log(id);
+     if(!emptyBox[id]) {
         emptyBox[id] = currentPlayer;
+        // this targets the text of the current player. X or O
         e.target.innerText = currentPlayer; 
+        // the below ternary allows the players to switch between X and O
+        currentPlayer = currentPlayer === player2 ? player1 : player2;
 
         // The logic behind if a player has won
-        if(playerWins())
-        playText.innerText = `${currentPlayer} has won!`
+        if(playerWins()) 
+        playText.innerText = `${currentPlayer} has won!`;
         // if the player wins, return out of the function
         return;
+       
+        
+        }
+    
+     
+    }
 
-        // the below ternary allows the players to switch between X and O
-        currentPlayer = currentPlayer === player1 ? player2 : player1;
 
-     }
-}
-
-// here we are checking to see if a player has won
+// Here we are checking to see if a player has won. These are all the different win conditions
 const playerWins = () => {
+    if(emptyBox[0] === currentPlayer){
+       if(emptyBox[1] === currentPlayer && emptyBox[2] === currentPlayer) {
+        console.log(`${currentPlayer} wins up top`);
+        return true;
+        }
+        if(emptyBox[3] === currentPlayer && emptyBox[6] === currentPlayer) {
+         console.log(`${currentPlayer} wins on the left`);
+         return true;
+        }
+        if(emptyBox[4] === currentPlayer && emptyBox[8] === currentPlayer) {
+            console.log(`${currentPlayer} wins diagonally`);
+            return true;
+        }
+    }
+    if(emptyBox[8] === currentPlayer){
+        if(emptyBox[2] === currentPlayer && emptyBox[5] === currentPlayer) {
+         console.log(`${currentPlayer} wins on the right`);
+         return true;
+         }
+         if(emptyBox[6] === currentPlayer && emptyBox[7] === currentPlayer) {
+          console.log(`${currentPlayer} wins on the bottom`);
+          return true;
+         }
+        
+    }
+    if(emptyBox[6] === currentPlayer){
+        if(emptyBox[4] === currentPlayer && emptyBox[2] === currentPlayer) {
+          console.log(`${currentPlayer} wins on the diagonally`);
+          return true;
+         }
+         
+    }
+    if(emptyBox[1] === currentPlayer){
+        if(emptyBox[4] === currentPlayer && emptyBox[7] === currentPlayer) {
+         console.log(`${currentPlayer} wins mid vertical`);
+         return true;
+         }
+    }
+    if(emptyBox[3] === currentPlayer){
+        if(emptyBox[4] === currentPlayer && emptyBox[5] === currentPlayer) {
+         console.log(`${currentPlayer} wins mid horizontally`);
+         return true;
+         } 
+    } 
+   
+    
+    //Here we are creating the function that will restart the game.
+    const startOver = () => {
+        emptyBox.forEach((emptyBox, index) => {
+            emptyBox[index] = null;
+        });
+        //This will erase the text inside each box before the game resets
+        boxes.forEach(box => {
+            box.innerText = '';
+        });
+        //This text will display when it is time for the first play of the game.
+        playText.innerText = 'Let\'s Go!';
+        currentPlayer = player2
+    }
+           
+    //Here we are adding an event listener (event handler) to listen for clicks on the reset button.
+    resetBtn.addEventListener('click', startOver);
+}    
+   
 
-}
-
+ 
+// startOver();
 drawBoard();
 
