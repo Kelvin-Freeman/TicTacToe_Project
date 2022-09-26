@@ -45,14 +45,14 @@ const boxClicked = (e) => {
         emptyBox[id] = currentPlayer;
         // this targets the text of the current player. X or O
         e.target.innerText = currentPlayer; 
-        // the below ternary allows the players to switch between X and O
+        // the below ternary allows the players to be switched between X and O
         currentPlayer = currentPlayer === player2 ? player1 : player2;
 
         // The logic behind if a player has won
         if(playerWins()) 
         playText.innerText = `${currentPlayer} has won!`;
         // if the player wins, return out of the function
-        return;
+        // return;
        
         
         }
@@ -105,30 +105,34 @@ const playerWins = () => {
         if(emptyBox[4] === currentPlayer && emptyBox[5] === currentPlayer) {
          console.log(`${currentPlayer} wins mid horizontally`);
          return true;
-         } 
-    } 
-   
-    
-    //Here we are creating the function that will restart the game.
-    const startOver = () => {
-        emptyBox.forEach((emptyBox, index) => {
-            emptyBox[index] = null;
-        });
-        //This will erase the text inside each box before the game resets
-        boxes.forEach(box => {
-            box.innerText = '';
-        });
-        //This text will display when it is time for the first play of the game.
-        playText.innerText = 'Let\'s Go!';
-        currentPlayer = player2
-    }
-           
-    //Here we are adding an event listener (event handler) to listen for clicks on the reset button.
-    resetBtn.addEventListener('click', startOver);
-}    
-   
+         }
+         
+         
+         
+    };
 
- 
-// startOver();
-drawBoard();
+    //Here we are creating the function that will restart the game when the reset button is pressed..
+    resetBtn.addEventListener("click", () => {
+        emptyBox.forEach((emptyBoxes, index) => {
+          emptyBox[index] = null;
+        });
+        boxes.forEach((box) => {
+          box.innerText = " ";
+        });
+        playText.innerHTML = `Let's Go!`;
+      
+        currentPlayer = player2;
+      });
+   
+}    
+
+drawBoard(); 
+
+
+
+
+
+
+
+
 

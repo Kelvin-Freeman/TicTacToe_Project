@@ -11,7 +11,7 @@ simple way to express my current knowledge of HTML, CSS and JavaScript.
  
 
 ## The Objective and How to Play
-Tic Tac Toe is about having fun. In this game the player tries to get three objects in the same row, horizontally, diagonally, or vertically. The first player to get three objects in a row wins the game.
+Tic Tac Toe is about having fun. In this game the player tries to get three objects in the same row, horizontally, diagonally, or vertically. The first player to get three objects in a row wins the game. When there are no more empty blocks, the user must click the reset button to reset the game.
 
 ---
 
@@ -33,6 +33,7 @@ Javascript
 ***Upcoming Features:***
 
 Players will have the ability to create a user account to log in. 
+Future versions will keep track of the score between players.
 
 
 
